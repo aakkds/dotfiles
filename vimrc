@@ -7,9 +7,9 @@
  Plugin 'scrooloose/nerdtree'
  Plugin 'tpope/vim-surround'
  Plugin 'jiangmiao/auto-pairs'
- Plugin 'Valloric/YouCompleteMe'
- Plugin 'rdnetto/YCM-Generator'
  "Plugin 'zenorocha/dracula-theme',{'rtp':'vim/'} 
+ let g:ConqueGdb_GdbExe = 'arm-none-eabi-gdb'
+ Plugin 'vim-scripts/Conque-GDB'
  
 call vundle#end() 
 filetype plugin indent on  
@@ -17,12 +17,16 @@ syntax on
 "autocmd VimEnter * NERDTree
 autocmd VimEnter * wincmd p
 set number 
+set rnu
 filetype plugin indent on  
 
+"Enable mouse scroll in tmux
+set mouse=a
 set autoindent 
+set tabstop=8
+set softtabstop=8
+set shiftwidth=8
 set noexpandtab 
-set tabstop=4 
-set shiftwidth=4 
 "set showtabline=2
 nnoremap tn :tabnext<CR>
 nnoremap tp :tabprev<CR>
@@ -46,6 +50,7 @@ endfunction
 set exrc 
 set secure 
 set background=dark
+set cursorline
 if &term=~ '256color'
 	"Disable Background erase
 	set t_ut=
