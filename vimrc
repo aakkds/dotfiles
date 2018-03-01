@@ -108,3 +108,6 @@ function MyTabLine()
 	return s
 endfunction
 :hi MatchParen cterm=none ctermbg=black ctermfg=green 
+
+highlight OverLength ctermbg=red ctermfg=white guibg=#592929
+match OverLength /\%81v.\+/
