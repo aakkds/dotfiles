@@ -35,6 +35,7 @@ nnoremap ta :qa<CR>
 nnoremap tr :NERDTree<CR>
 nnoremap sc :nohlsearch<CR>
 set tags=tags;/ 
+:autocmd ColorScheme * highlight ExtraWhitespace ctermbg=darkgreen guibg=lightgreen
 colorscheme atom-dark-256  
 autocmd WinEnter * call s:CloseIfOnlyNerdTreeLeft()
 
@@ -109,5 +110,7 @@ function MyTabLine()
 endfunction
 :hi MatchParen cterm=none ctermbg=black ctermfg=green 
 
-highlight OverLength ctermbg=red ctermfg=white guibg=#592929
-match OverLength /\%81v.\+/
+:set colorcolumn=80
+
+" Show trailing whitespace and spaces before a tab:
+:match ExtraWhitespace /\s\+$\| \+\ze\t/
