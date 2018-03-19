@@ -1,32 +1,33 @@
- set nocompatible 
- filetype off 
- 
+ set nocompatible
+ filetype off
+
  set rtp+=~/.vim/bundle/Vundle.vim
- call vundle#begin() 
+ call vundle#begin()
  Plugin 'VundleVim/Vundle.vim'
  Plugin 'scrooloose/nerdtree'
  Plugin 'tpope/vim-surround'
  Plugin 'jiangmiao/auto-pairs'
- "Plugin 'zenorocha/dracula-theme',{'rtp':'vim/'} 
+ Plugin 'SirVer/ultisnips'
+ Plugin 'honza/vim-snippets'
  let g:ConqueGdb_GdbExe = 'arm-none-eabi-gdb'
  Plugin 'vim-scripts/Conque-GDB'
- 
-call vundle#end() 
-filetype plugin indent on  
+
+call vundle#end()
+filetype plugin indent on
 syntax on
 "autocmd VimEnter * NERDTree
 autocmd VimEnter * wincmd p
-set number 
+set number
 set rnu
-filetype plugin indent on  
+filetype plugin indent on
 
 "Enable mouse scroll in tmux
 set mouse=a
-set autoindent 
+set autoindent
 set tabstop=8
 set softtabstop=8
 set shiftwidth=8
-set noexpandtab 
+set noexpandtab
 "set showtabline=2
 nnoremap tn :tabnext<CR>
 nnoremap tp :tabprev<CR>
@@ -34,22 +35,22 @@ nnoremap tq :q<CR>
 nnoremap ta :qa<CR>
 nnoremap tr :NERDTree<CR>
 nnoremap sc :nohlsearch<CR>
-set tags=tags;/ 
+set tags=tags;/
 :autocmd ColorScheme * highlight ExtraWhitespace ctermbg=darkgreen guibg=lightgreen
-colorscheme atom-dark-256  
+colorscheme atom-dark-256
 autocmd WinEnter * call s:CloseIfOnlyNerdTreeLeft()
 
 function! s:CloseIfOnlyNerdTreeLeft()
     if exists("t:NERDTreeBufName")
         if bufwinnr(t:NERDTreeBufName) != -1
             if winnr("$") == 1
-                q 
-            endif 
-        endif 
+                q
+            endif
+        endif
     endif
-endfunction 
-set exrc 
-set secure 
+endfunction
+set exrc
+set secure
 set background=dark
 set cursorline
 if &term=~ '256color'
@@ -79,7 +80,7 @@ function MyTabLine()
 			else
 				let n .= pathshorten(bufname(b))
 			endif
-			if getbufvar( b, "&modified") 
+			if getbufvar( b, "&modified")
 				let m +=1
 			endif
 			if bc > 1
@@ -108,7 +109,7 @@ function MyTabLine()
 	endif
 	return s
 endfunction
-:hi MatchParen cterm=none ctermbg=black ctermfg=green 
+:hi MatchParen cterm=none ctermbg=black ctermfg=green
 
 :set colorcolumn=80
 
