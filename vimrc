@@ -12,11 +12,44 @@
 call vundle#end()
 filetype plugin indent on
 syntax on
-"autocmd VimEnter * NERDTree
 autocmd VimEnter * wincmd p
 set number
 set rnu
 filetype plugin indent on
+
+let mapleader = " "
+"git grep for work under cursor
+nnoremap <Leader>g yiw:!git grep <C-R>" <CR>
+"open filename in current buffer (contained in system clipboard)
+nnoremap <Leader>ob :e <C-R>+ <CR>
+"open filename in vertical split (contained in system clipboard)
+nnoremap <Leader>ov :vsp <C-R>+ <CR>
+"open filename in horizontal split (contained in system clipboard)
+nnoremap <Leader>os :sp <C-R>+ <CR>
+"open filename in new tab (contained in system clipboard)
+nnoremap <Leader>ot :tabnew <C-R>+ <CR>
+"save
+nnoremap <Leader>s :w <CR>
+"quit
+nnoremap <Leader>q :q <CR>
+"next tab
+nnoremap <Leader>tn :tabnext <CR>
+"prev tab
+nnoremap <Leader>tp :tabprev <CR>
+"nerdTree
+nnoremap <Leader>tr :NERDTree <CR>
+"jump to ctags definition
+nnoremap <Leader>j <C-]>
+
+map <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
+\ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
+\ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
+
+"Clear search
+nnoremap <silent> <Leader><Leader> :nohlsearch <CR>
+
+hi CursorLineNr term=bold ctermfg=Magenta gui=bold guifg=Magenta
+hi LineNr term=bold ctermfg=DarkGrey gui=bold guifg=DarkGrey
 
 "Enable mouse scroll in tmux
 set mouse=a
@@ -25,13 +58,8 @@ set tabstop=8
 set softtabstop=8
 set shiftwidth=8
 set noexpandtab
-"set showtabline=2
-nnoremap tn :tabnext<CR>
-nnoremap tp :tabprev<CR>
-nnoremap tq :q<CR>
-nnoremap ta :qa<CR>
-nnoremap tr :NERDTree<CR>
-nnoremap sc :nohlsearch<CR>
+set timeoutlen=1000 ttimeoutlen=0
+
 set tags=tags;/
 autocmd WinEnter * call s:CloseIfOnlyNerdTreeLeft()
 
