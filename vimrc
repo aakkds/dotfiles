@@ -6,11 +6,8 @@
  Plugin 'VundleVim/Vundle.vim'
  Plugin 'scrooloose/nerdtree'
  Plugin 'tpope/vim-surround'
- Plugin 'jiangmiao/auto-pairs'
  Plugin 'SirVer/ultisnips'
  Plugin 'honza/vim-snippets'
- let g:ConqueGdb_GdbExe = 'arm-none-eabi-gdb'
- Plugin 'vim-scripts/Conque-GDB'
 
 call vundle#end()
 filetype plugin indent on
@@ -36,8 +33,6 @@ nnoremap ta :qa<CR>
 nnoremap tr :NERDTree<CR>
 nnoremap sc :nohlsearch<CR>
 set tags=tags;/
-:autocmd ColorScheme * highlight ExtraWhitespace ctermbg=darkgreen guibg=lightgreen
-colorscheme atom-dark-256
 autocmd WinEnter * call s:CloseIfOnlyNerdTreeLeft()
 
 function! s:CloseIfOnlyNerdTreeLeft()
@@ -51,12 +46,6 @@ function! s:CloseIfOnlyNerdTreeLeft()
 endfunction
 set exrc
 set secure
-set background=dark
-set cursorline
-if &term=~ '256color'
-	"Disable Background erase
-	set t_ut=
-endif
 set tabline=%!MyTabLine()
 function MyTabLine()
 	let s = ''
@@ -109,9 +98,4 @@ function MyTabLine()
 	endif
 	return s
 endfunction
-:hi MatchParen cterm=none ctermbg=black ctermfg=green
 
-:set colorcolumn=80
-
-" Show trailing whitespace and spaces before a tab:
-:match ExtraWhitespace /\s\+$\| \+\ze\t/
