@@ -10,12 +10,13 @@
  Plugin 'honza/vim-snippets'
 
 call vundle#end()
-filetype plugin indent on
+set t_Co=256
 syntax on
 autocmd VimEnter * wincmd p
 set number
 set rnu
 filetype plugin indent on
+filetype plugin on
 
 let mapleader = " "
 "git grep for work under cursor
@@ -48,8 +49,20 @@ map <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans
 "Clear search
 nnoremap <silent> <Leader><Leader> :nohlsearch <CR>
 
-hi CursorLineNr term=bold ctermfg=Magenta gui=bold guifg=Magenta
-hi LineNr term=bold ctermfg=DarkGrey gui=bold guifg=DarkGrey
+hi CursorLineNr term=bold ctermfg=Magenta
+hi LineNr term=bold ctermfg=34
+hi cStorageClass ctermfg=Green
+hi cType ctermfg=LightBlue
+hi cStructure ctermfg=LightBlue
+hi cRepeat ctermfg=Green
+hi cConditional ctermfg=Green
+hi Visual cterm=reverse ctermbg=NONE
+hi cStatement ctermfg=DarkGreen
+hi cDefine ctermfg=DarkCyan
+hi cString ctermfg=21
+hi cNumber ctermfg=21
+hi cDefine ctermfg=25
+hi cConstant ctermfg=34
 
 "Enable mouse scroll in tmux
 set mouse=a
