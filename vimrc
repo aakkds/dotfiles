@@ -25,8 +25,6 @@ filetype plugin on
 autocmd BufWritePre * :%s/\s\+$//e
 
 let mapleader = " "
-"git grep for work under cursor
-nnoremap <Leader>g yiw:!git grep <C-R>" <CR>
 "open filename in current buffer (contained in system clipboard)
 nnoremap <Leader>ob :e <C-R>+ <CR>
 "open filename in vertical split (contained in system clipboard)
@@ -93,3 +91,20 @@ set exrc
 set secure
 set cursorline
 
+function! s:ExecuteInShell(command)
+  let command = join(map(split(a:command), 'expand(v:val)'))
+  let winnr = bufwinnr('^' . command . '$')
+  silent! execute  winnr < 0 ? 'botright new ' . fnameescape(command) : winnr . 'wincmd w'
+  setlocal buftype=nowrite bufhidden=wipe nobuflisted noswapfile nowrap number
+  echo 'Execute ' . command . '...'
+  silent! execute 'silent %!'. command
+  silent! execute 'resize ' . line('$')
+  silent! redraw
+  silent! execute 'au BufUnload <buffer> execute bufwinnr(' . bufnr('#') . ') . ''wincmd w'''
+  silent! execute 'nnoremap <silent> <buffer> <LocalLeader>r :call <SID>ExecuteInShell(''' . command . ''')<CR>'
+  echo 'Shell command ' . command . ' executed.'
+endfunction
+command! -complete=shellcmd -nargs=+ Shell call s:ExecuteInShell(<q-args>)
+
+"git grep for work under cursor
+nnoremap <Leader>g yiw:Shell git grep <C-R>" <CR>
