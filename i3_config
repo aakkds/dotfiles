@@ -44,7 +44,8 @@ font pango:DejaVu Sans Mono 8
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec i3-sensible-terminal
+#bindsym $mod+Return exec i3-sensible-terminal
+bindsym $mod+Return exec xfce4-terminal
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -55,6 +56,8 @@ bindsym $mod+d exec rofi -show drun
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
 # installed.
 # bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
+
+bindym $mod+Shift+x exec i3lock --color=000000
 
 # change focus
 bindsym $mod+h focus left
@@ -81,10 +84,10 @@ bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
 # split in horizontal orientation
-bindsym $mod+- split h
+bindsym $mod+v split h
 
 # split in vertical orientation
-bindsym $mod+v split v
+bindsym $mod+b split v
 
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
@@ -109,22 +112,30 @@ bindsym $mod+a focus parent
 # Define names for default workspaces for which we configure key bindings later on.
 # We use variables to avoid repeating the names in multiple places.
 set $ws1 "1: Code"
-set $ws2 "2: Firefox"
-set $ws3 "3: Dbg"
-set $ws4 "4"
-set $ws5 "5"
-set $ws6 "6"
+set $ws2 "2: Dbg"
+set $ws3 "3: Firefox"
+set $ws4 "4: Mail"
+set $ws5 "5: Music"
+set $ws6 "6: Pdf"
 set $ws7 "7"
 set $ws8 "8"
 set $ws9 "9"
-set $ws10 "10"
+set $ws10 "10: Dump"
 
-set $monitorLeft DVI-I-1
-set $monitorRight HDMI-1
+set $monitorLeft DP-2-3
+set $monitorRight DP-2-2
+set $monitorLaptop eDP-1
 
 workspace $ws1 output $monitorRight
 workspace $ws2 output $monitorLeft
-workspace $ws3 output $monitorRight
+workspace $ws3 output $monitorLeft
+workspace $ws4 output $monitorLeft
+workspace $ws5 output $monitorLeft
+workspace $ws6 output $monitorLeft
+workspace $ws7 output $monitorLeft
+workspace $ws8 output $monitorRight
+workspace $ws9 output $monitorRight
+workspace $ws10 output $monitorLaptop
 
 # switch to workspace
 bindsym $mod+1 workspace $ws1
@@ -184,17 +195,34 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
+#i3 move a workspace to another monitor (multi monitor setup)
+mode "move_workspace" {
+ bindsym k move workspace to output up
+ bindsym j move workspace to output down
+ bindsym h move workspace to output left
+ bindsym l move workspace to output right
+
+ bindsym Escape mode "default"
+}
+
+bindsym $mod+o mode "move_workspace"
+
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
         #status_command i3status
 }
 
+focus_follows_mouse no
+
 new_window pixel 0
 
-#gaps inner 10
-#gaps outer 10
-#smart_gaps on
-#smart_borders on
+exec --no-startup-id xmodmap -e "clear lock"
+exec --no-startup-id xmodmap -e "keysym Caps_Lock = Escape"
 
-exec --no-startup-id feh --bg-scale ~/Pictures/wallpaper.jpg
+exec --no-startup-id xrandr --output VGA-1 --off --output DP-2-1 --off --output DP-2-2 --mode 1920x1080 --pos 1920x0 --rotate normal --output DP-2-3 --mode 1920x1080 --pos 0x0 --rotate normal --output eDP-1 --primary --mode 1920x1080 --pos 3840x0 --rotate normal --output HDMI-2 --off --output HDMI-1 --off --output DP-2 --off --output DP-1 --off
+#exec --no-startup-id xrandr --output VGA-1 --off --output DP-2-1 --off --output DP-2-2 --mode 1920x1080 --pos 1920x0 --rotate normal --output DP-2-3 --mode 1920x1080 --pos 0x0 --rotate normal --output eDP-1 --primary --mode 2880x1620 --pos 3840x0 --rotate normal --output HDMI-2 --off --output HDMI-1 --off --output DP-2 --off --output DP-1 --off
+#exec --no-startup-id xrandr --output VGA-1 --off --output DP-2-1 --mode 1920x1080 --pos 3840x0 --rotate normal --output DP-2-2 --mode 1920x1080 --pos 1920x0 --rotate normal --output DP-2-3 --off --output eDP-1 --primary --mode 1920x1080 --pos 0x0 --rotate normal --output HDMI-2 --off --output HDMI-1 --off --output DP-2 --off --output DP-1 --off
+
+exec --no-startup-id feh --bg-scale ~/Pictures/wallpaper1920x1080.jpg
+

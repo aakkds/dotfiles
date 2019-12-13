@@ -8,6 +8,7 @@
  Plugin 'tpope/vim-surround'
  Plugin 'SirVer/ultisnips'
  Plugin 'honza/vim-snippets'
+ Plugin 'jiangmiao/auto-pairs'
 
 call vundle#end()
 set t_Co=256
@@ -15,8 +16,13 @@ syntax on
 autocmd VimEnter * wincmd p
 set number
 set rnu
+set nois
+set scrolloff=0
+"set background=dark
+"colorscheme PaperColor
 filetype plugin indent on
 filetype plugin on
+autocmd BufWritePre * :%s/\s\+$//e
 
 let mapleader = " "
 "git grep for work under cursor
@@ -42,30 +48,36 @@ nnoremap <Leader>tr :NERDTree <CR>
 "jump to ctags definition
 nnoremap <Leader>j <C-]>
 
-map <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
+nnoremap <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
 \ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
 \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
 
 "Clear search
-nnoremap <silent> <Leader><Leader> :nohlsearch <CR>
+nnoremap <silent> <Leader><Leader> :noh <CR>
 
-hi CursorLineNr term=bold ctermfg=21
+set colorcolumn=80
+
+hi CursorLineNr term=bold ctermfg=30
 hi LineNr term=bold ctermfg=LightGrey
-hi cStorageClass ctermfg=Green
+hi cStorageClass ctermfg=78
 hi cType ctermfg=41
-hi cStructure ctermfg=41
+hi cppType ctermfg=41
+hi cStructure ctermfg=50
 hi cRepeat ctermfg=Green
 hi cConditional ctermfg=Green
 hi Visual cterm=reverse ctermbg=NONE
 hi cStatement ctermfg=DarkGreen
 hi cDefine ctermfg=DarkCyan
-hi cString ctermfg=21
-hi cNumber ctermfg=21
+hi cString ctermfg=80
+hi cNumber ctermfg=50
 hi cDefine ctermfg=25
-hi cConstant ctermfg=54
+hi cConstant ctermfg=49
 hi cOperator ctermfg=68
 hi cUserLabel ctermfg=77
+hi cPreCondit ctermfg=12
+hi Search ctermbg=black ctermfg=Green cterm=bold
 hi MatchParen cterm=bold ctermbg=none ctermfg=50
+hi ColorColumn ctermbg=black ctermfg=red cterm=bold
 
 "Enable mouse scroll in tmux
 set mouse=a
@@ -75,10 +87,9 @@ set softtabstop=8
 set shiftwidth=8
 set noexpandtab
 set timeoutlen=1000 ttimeoutlen=0
-"Disable statusline
-set laststatus=0
 
 set tags=tags;/
 set exrc
 set secure
+set cursorline
 
