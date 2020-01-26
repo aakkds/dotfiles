@@ -1,17 +1,27 @@
 #! /bin/sh
-. "${HOME}/.cache/wal/colors.sh"
+source ~/.bashrc
 
+killall sxhkd
+killall bspc
 sxhkd &
 
 bspc monitor DVI-I-1 -d 6 7 8 9 0
 bspc monitor HDMI-1 -d 1 2 3 4 5
+#bspc monitor XWAYLAND1 -d 6 7 8 9 0
+#bspc monitor XWAYLAND0 -d 1 2 3 4 5
 
 bspc config border_width         2
 bspc config window_gap          12
 
+bspc config normal_border_color	 "#12400b"
+bspc config focused_border_color "#03fc0b"
 bspc config split_ratio          0.52
 bspc config borderless_monocle   true
 bspc config gapless_monocle      true
 
-#feh --bg-scale ~/Pictures/wp8.jpg
-wal -i ~/Pictures/wp6.jpg -a 5 -n
+#feh --bg-scale ~/Pictures/wp.jpg
+#wal -i ~/Pictures/wp6.jpg -a 5 -n
+sleep 1
+bspc rule -a Xfce4-terminal -o desktop=^6 state=floating rectangle=800x400+100+100 sticky=on hidden=on && xfce4-terminal --title=$GIT_TERM
+sleep 1
+bspc rule -a Xfce4-terminal -o desktop=^6 state=floating rectangle=800x400+100+600 sticky=on hidden=on && xfce4-terminal --title=$CALC_TERM

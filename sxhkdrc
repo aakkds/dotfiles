@@ -1,10 +1,9 @@
-#
 # wm independent hotkeys
 #
 
 # terminal emulator
 super + Return
-	urxvt
+	xfce4-terminal
 
 # program launcher
 super + space
@@ -119,3 +118,12 @@ super + alt + shift + {h,j,k,l}
 # move a floating window
 super + {Left,Down,Up,Right}
 bspc node -v {-20 0,0 20,0 -20,20 0}
+
+alt + k
+	~/.script/toggle_hidden.sh $GIT_TERM
+
+alt + i
+	~/.script/toggle_hidden.sh $CALC_TERM
+
+
+
