@@ -24,15 +24,10 @@ filetype plugin indent on
 filetype plugin on
 autocmd BufWritePre * :%s/\s\+$//e
 
+let g:CommandTMaxFiles=500000
+"let g:CommandTFileScanner = 'watchman'
+"let g:CommandTWildIgnore=",*/doc */build*/"
 let mapleader = " "
-"open filename in current buffer (contained in system clipboard)
-nnoremap <Leader>ob :e <C-R>+ <CR>
-"open filename in vertical split (contained in system clipboard)
-nnoremap <Leader>ov :vsp <C-R>+ <CR>
-"open filename in horizontal split (contained in system clipboard)
-nnoremap <Leader>os :sp <C-R>+ <CR>
-"open filename in new tab (contained in system clipboard)
-nnoremap <Leader>ot :tabnew <C-R>+ <CR>
 "save
 nnoremap <Leader>s :w <CR>
 "quit
@@ -55,26 +50,6 @@ nnoremap <silent> <Leader><Leader> :noh <CR>
 
 set colorcolumn=80
 
-hi CursorLineNr term=bold ctermfg=30
-hi LineNr term=bold ctermfg=LightGrey
-hi cStorageClass ctermfg=78
-hi cType ctermfg=41
-hi cppType ctermfg=41
-hi cStructure ctermfg=50
-hi cRepeat ctermfg=Green
-hi cConditional ctermfg=Green
-hi Visual cterm=reverse ctermbg=NONE
-hi cStatement ctermfg=DarkGreen
-hi cDefine ctermfg=DarkCyan
-hi cString ctermfg=80
-hi cNumber ctermfg=50
-hi cDefine ctermfg=25
-hi cConstant ctermfg=49
-hi cOperator ctermfg=68
-hi cUserLabel ctermfg=77
-hi cPreCondit ctermfg=12
-hi Search ctermbg=black ctermfg=Green cterm=bold
-hi MatchParen cterm=bold ctermbg=none ctermfg=50
 hi ColorColumn ctermbg=black ctermfg=red cterm=bold
 
 "Enable mouse scroll in tmux
@@ -89,6 +64,7 @@ set timeoutlen=1000 ttimeoutlen=0
 set tags=tags;/
 set exrc
 set secure
+hi CursorLine ctermbg=235
 set cursorline
 
 function! s:ExecuteInShell(command)
@@ -108,3 +84,17 @@ command! -complete=shellcmd -nargs=+ Shell call s:ExecuteInShell(<q-args>)
 
 "git grep for work under cursor
 nnoremap <Leader>g yiw:Shell git grep <C-R>" <CR>
+"open filename in current buffer (contained in system clipboard)
+nnoremap <Leader>ob :e <C-R>" <CR>
+"open filename in vertical split (contained in system clipboard)
+nnoremap <Leader>ov :vsp <C-R>" <CR>
+"open filename in horizontal split (contained in system clipboard)
+nnoremap <Leader>os :sp <C-R>" <CR>
+"open filename in new tab (contained in system clipboard)
+nnoremap <Leader>ot :tabnew <C-R>" <CR>
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
+
+autocmd BufNewFile,BufRead *.go setlocal noexpandtab tabstop=4 shiftwidth=4
