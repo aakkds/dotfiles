@@ -31,7 +31,7 @@ set $mod Mod4
 
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
-font pango:DejaVu Sans Mono 8
+font pango:DejaVu Sans Mono 12
 
 # Before i3 v4.8, we used to recommend this one as the default:
 # font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
@@ -57,7 +57,7 @@ bindsym $mod+d exec rofi -show drun
 # installed.
 # bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 
-bindym $mod+Shift+x exec i3lock --color=000000
+bindsym $mod+Shift+x exec i3lock --color=000000
 
 # change focus
 bindsym $mod+h focus left
@@ -111,16 +111,17 @@ bindsym $mod+a focus parent
 
 # Define names for default workspaces for which we configure key bindings later on.
 # We use variables to avoid repeating the names in multiple places.
-set $ws1 "1: Code"
-set $ws2 "2: Dbg"
-set $ws3 "3: Firefox"
-set $ws4 "4: Mail"
-set $ws5 "5: Music"
-set $ws6 "6: Pdf"
-set $ws7 "7"
-set $ws8 "8"
-set $ws9 "9"
-set $ws10 "10: Dump"
+# https://fontawesome.com/cheatsheet?from=io
+set $ws1 "1:  "
+set $ws2 "2:  "
+set $ws3 "3:  "
+set $ws4 "4:  "
+set $ws5 "5:  "
+set $ws6 "6:  "
+set $ws7 "7:  "
+set $ws8 "8:  "
+set $ws9 "9:  "
+set $ws10 "10:  "
 
 set $monitorLeft DP-2-3
 set $monitorRight DP-2-2
@@ -170,39 +171,40 @@ bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcu
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
-        # These bindings trigger as soon as you enter the resize mode
+# These bindings trigger as soon as you enter the resize mode
 
-        # Pressing left will shrink the window’s width.
-        # Pressing right will grow the window’s width.
-        # Pressing up will shrink the window’s height.
-        # Pressing down will grow the window’s height.
-        bindsym j resize shrink width 10 px or 10 ppt
-        bindsym k resize grow height 10 px or 10 ppt
-        bindsym l resize shrink height 10 px or 10 ppt
-        bindsym eacute resize grow width 10 px or 10 ppt
+# Pressing left will shrink the window’s width.
+# Pressing right will grow the window’s width.
+# Pressing up will shrink the window’s height.
+# Pressing down will grow the window’s height.
+	bindsym h resize grow width 10 px or 10 ppt
+		bindsym j resize shrink width 10 px or 10 ppt
+		bindsym k resize grow height 10 px or 10 ppt
+		bindsym l resize shrink height 10 px or 10 ppt
+		bindsym eacute resize grow width 10 px or 10 ppt
 
-        # same bindings, but for the arrow keys
-        bindsym Left resize shrink width 10 px or 10 ppt
-        bindsym Down resize grow height 10 px or 10 ppt
-        bindsym Up resize shrink height 10 px or 10 ppt
-        bindsym Right resize grow width 10 px or 10 ppt
+# same bindings, but for the arrow keys
+		bindsym Left resize shrink width 10 px or 10 ppt
+		bindsym Down resize grow height 10 px or 10 ppt
+		bindsym Up resize shrink height 10 px or 10 ppt
+		bindsym Right resize grow width 10 px or 10 ppt
 
-        # back to normal: Enter or Escape or $mod+r
-        bindsym Return mode "default"
-        bindsym Escape mode "default"
-        bindsym $mod+r mode "default"
+# back to normal: Enter or Escape or $mod+r
+		bindsym Return mode "default"
+		bindsym Escape mode "default"
+		bindsym $mod+r mode "default"
 }
 
 bindsym $mod+r mode "resize"
 
 #i3 move a workspace to another monitor (multi monitor setup)
 mode "move_workspace" {
- bindsym k move workspace to output up
- bindsym j move workspace to output down
- bindsym h move workspace to output left
- bindsym l move workspace to output right
+	bindsym k move workspace to output up
+		bindsym j move workspace to output down
+		bindsym h move workspace to output left
+		bindsym l move workspace to output right
 
- bindsym Escape mode "default"
+		bindsym Escape mode "default"
 }
 
 bindsym $mod+o mode "move_workspace"
@@ -210,12 +212,21 @@ bindsym $mod+o mode "move_workspace"
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
-        #status_command i3status
+	#status_command i3status
+	font pango:DejaVu Sans Mono, FontAwesome 12
+		colors {
+			separator #444444
+				background #222222
+				statusline #B1B1B1
+				focused_workspace #CECECE #CECECE #0e7512
+				active_workspace #15d8ed #15d8ed #333333
+				inactive_workspace #CECECE #333333 #15d8ed
+				urgent_workspace #eb709b #eb709b #ffffff
+		}
 }
 
 focus_follows_mouse no
-
-new_window pixel 0
+new_window pixel 2
 
 exec --no-startup-id xmodmap -e "clear lock"
 exec --no-startup-id xmodmap -e "keysym Caps_Lock = Escape"
@@ -224,5 +235,8 @@ exec --no-startup-id xrandr --output VGA-1 --off --output DP-2-1 --off --output 
 #exec --no-startup-id xrandr --output VGA-1 --off --output DP-2-1 --off --output DP-2-2 --mode 1920x1080 --pos 1920x0 --rotate normal --output DP-2-3 --mode 1920x1080 --pos 0x0 --rotate normal --output eDP-1 --primary --mode 2880x1620 --pos 3840x0 --rotate normal --output HDMI-2 --off --output HDMI-1 --off --output DP-2 --off --output DP-1 --off
 #exec --no-startup-id xrandr --output VGA-1 --off --output DP-2-1 --mode 1920x1080 --pos 3840x0 --rotate normal --output DP-2-2 --mode 1920x1080 --pos 1920x0 --rotate normal --output DP-2-3 --off --output eDP-1 --primary --mode 1920x1080 --pos 0x0 --rotate normal --output HDMI-2 --off --output HDMI-1 --off --output DP-2 --off --output DP-1 --off
 
-exec --no-startup-id feh --bg-scale ~/Pictures/wallpaper1920x1080.jpg
+#exec --no-startup-id feh --bg-scale ~/Pictures/wallpaper1920x1080.jpg
 
+client.focused_inactive #0d1010 #212121 #0e7512	 #0d1010 #063340
+client.unfocused        #0d1010 #212121 #15d8ed #424242 #063340
+client.focused          #d9d9d9 #cecece #0e7512 #d9d9d9 #d9d9d9
